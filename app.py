@@ -4,6 +4,7 @@ from data import news
 import pandas as pd
 import datetime
 from dotenv import load_dotenv
+
 load_dotenv()
 
 newsFetch = news.fetchNews()
