@@ -2,7 +2,11 @@ from data import fetch
 from data import news
 #from data import compress
 import pandas as pd
+import datetime
+import os
+
 newsFetch = news.fetchNews()
+
 
 print("Welcome to analyst's stock news data set for ml")
 #enter in the list below all the stocks you want to record
@@ -24,18 +28,23 @@ for i in range(len(all_tickers)):
     params["period"],
     params["interval"]
     ))
+  #fetch news on stock
+  news = newsFetch.autoQuery(fetch.getName(all_tickers[i]))
 
-  data = {
-    'date': 'test',
-    'tiker': all_tickers[i],
-    'slope': (points[0] - points[1]) / (0 - 1),
-    'news': { '':newsFetch.autoQuery(all_tickers[i]) }
-  }
-
-  df = pd.DataFrame(data, columns=['date', 'tiker', 'slope', 'news'])
- 
+  data = pd.Series([all_tickers[i], (points[0] - points[1]) / (0 - 1), news])
+  #create Data Frame
+  df = pd.DataFrame([list(data)], columns=['tiker', 'slope', 'news'], index=[str(datetime.datetime.now().strftime("%m-%d-%Y"))])
+  #append data frame into Array
   frames.append(df)
-  
+#concat the results of all data frames
 result = pd.concat(frames)
+#print results
 
-print(result)
+try: 
+  result.to_csv('data.csv', mode='a')
+  print(pd.read_csv('data.csv'))
+except:
+  try:
+    result.to_csv('data.csv')
+  except OSError as err:
+      print(err)

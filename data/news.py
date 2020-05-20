@@ -3,14 +3,21 @@ from urllib import request as req
 from urllib import parse
 #Import json to manipulate api data
 import json
+import datetime as dt
 
 class fetchNews():
   def __init__(self):
-    self.url = "https://analyst.herokuapp.com/newsQuery/?"
-  
+    self.url = "http://newsapi.org/v2/everything?"
+    self.apiKey = "00c5d9ca4de7403889beb4beca08c1d3"
   def createQuery(self, ticker):
+        date = str(dt.datetime.now().strftime("%Y-%m-%d"))
+
         self.queryParam = {
-            "ticker":str(ticker),          
+            "q":str(ticker),   
+            "from":date,
+            "to":date,
+            'sortBy':'popularity',
+            "apiKey":self.apiKey       
         }
         self.parseQuery()
     #END
@@ -36,9 +43,10 @@ class fetchNews():
   def clean_data(self):
     self.newsData = []
 
-    for i in self.json['articles']:
-      if not i['title'] == '' and not i['title'] == 'undefined':
-        self.newsData.append([i['title'], i['url']])
+    for i in self.json["articles"]:
+      self.newsData.append([i['title'],i['author'], i['source']['name']])
+
+
 
   #to make life easy :)
   def autoQuery(self, t):
