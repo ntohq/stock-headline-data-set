@@ -3,7 +3,8 @@ from data import news
 #from data import compress
 import pandas as pd
 import datetime
-import os
+from dotenv import load_dotenv
+load_dotenv()
 
 newsFetch = news.fetchNews()
 

@@ -4,11 +4,13 @@ from urllib import parse
 #Import json to manipulate api data
 import json
 import datetime as dt
+import os
+
 
 class fetchNews():
   def __init__(self):
     self.url = "http://newsapi.org/v2/everything?"
-    self.apiKey = "00c5d9ca4de7403889beb4beca08c1d3"
+    self.apiKey = os.environ['key']
   def createQuery(self, ticker):
         date = str(dt.datetime.now().strftime("%Y-%m-%d"))
 
