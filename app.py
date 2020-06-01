@@ -12,7 +12,7 @@ newsFetch = news.fetchNews()
 
 print("Welcome to analyst's stock news data set for ml")
 #enter in the list below all the stocks you want to record
-all_tickers = ['PFE', 'INO', 'SNY', 'NVS', 'CVX', 'OXY', 'FSLR', 'XOM', 'CVX', 'SM', 'HAL', 'AVB', 'EXR', 'MAC', 'AAPL', 'MSFT', 'FB', 'ATVI']
+all_tickers = ['PFE', 'INO', 'SNY', 'NVS', 'CVX', 'OXY', 'FSLR', 'XOM', 'SM', 'HAL', 'AVB', 'EXR', 'MAC', 'AAPL', 'MSFT', 'FB', 'ATVI']
 
 #stock var paramaters
 params = {
